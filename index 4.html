@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHASE RAPH — Luxury Fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --deep: #0d0d14;
+    --purple-dark: #1a0a2e;
+    --purple-mid: #3d1a6e;
+    --purple: #7b35c0;
+    --purple-light: #a855f7;
+    --purple-glow: #c084fc;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --white: #f5f0ff;
+    --gray: #8a8a9a;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── CUSTOM SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--purple-mid); border-radius: 2px; }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 60px;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.98) 0%, transparent 100%);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 8px;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .nav-logo span {
+    color: var(--purple-light);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--purple-light); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .admin-btn {
+    background: transparent;
+    border: 1px solid var(--purple-mid);
+    color: var(--purple-light);
+    padding: 8px 20px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .admin-btn:hover {
+    background: var(--purple-mid);
+    color: var(--white);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(61,26,110,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 30% 20%, rgba(123,53,192,0.15) 0%, transparent 60%),
+      linear-gradient(135deg, #080808 0%, #0d0d14 50%, #1a0a2e 100%);
+  }
+
+  .hero-line {
+    position: absolute;
+    left: 0; top: 50%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(168,85,247,0.3), transparent);
+    transform: translateY(-50%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--purple-light);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 10vw, 140px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 32px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--purple-light);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    line-height: 2;
+    max-width: 400px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple-mid), var(--purple));
+    border: none;
+    color: var(--white);
+    padding: 16px 40px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .btn-primary:hover::after { opacity: 1; }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(168,85,247,0.3);
+    color: var(--gray);
+    padding: 16px 40px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--purple-light);
+    color: var(--purple-light);
+  }
+
+  .hero-image-area {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    filter: saturate(0.4) brightness(0.8);
+    mix-blend-mode: luminosity;
+  }
+
+  .hero-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, transparent 40%, transparent 70%, rgba(8,8,8,0.8) 100%);
+  }
+
+  /* placeholder hero image */
+  .hero-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, var(--purple-dark) 0%, var(--black) 60%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-placeholder-text {
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 300;
+    color: rgba(168,85,247,0.08);
+    letter-spacing: -4px;
+    font-style: italic;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-section {
+    border-top: 1px solid rgba(168,85,247,0.2);
+    border-bottom: 1px solid rgba(168,85,247,0.2);
+    padding: 16px 0;
+    background: rgba(61,26,110,0.08);
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    padding: 0 40px;
+    flex-shrink: 0;
+  }
+
+  .marquee-dot {
+    color: var(--purple-light);
+    margin-right: 40px;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    letter-spacing: -1px;
+  }
+
+  .section-title em { font-style: italic; color: var(--purple-light); }
+
+  /* ── COLLECTION ── */
+  .collection-section {
+    padding: 100px 60px;
+    position: relative;
+  }
+
+  .collection-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--purple-mid));
+    transform: translateX(-50%);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .product-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    group: true;
+  }
+
+  .product-card:nth-child(1) { grid-row: span 2; }
+
+  .product-img-wrap {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+    background: var(--deep);
+  }
+
+  .product-card:nth-child(1) .product-img-wrap {
+    aspect-ratio: unset;
+    height: 100%;
+  }
+
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.8s;
+    filter: saturate(0.5) brightness(0.85);
+  }
+
+  .product-card:hover .product-img {
+    transform: scale(1.06);
+    filter: saturate(0.8) brightness(0.9);
+  }
+
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.1) 50%, transparent 100%);
+    transition: opacity 0.4s;
+  }
+
+  .product-purple-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--purple-light), transparent);
+    transform: scaleX(0);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .product-card:hover .product-purple-line { transform: scaleX(1); }
+
+  .product-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px;
+    transform: translateY(4px);
+    transition: transform 0.4s;
+  }
+
+  .product-card:hover .product-info { transform: translateY(0); }
+
+  .product-cat {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 6px;
+  }
+
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .product-price {
+    font-size: 13px;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+  }
+
+  .product-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .product-placeholder-icon {
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-placeholder-icon svg {
+    width: 24px; height: 24px;
+    stroke: rgba(168,85,247,0.4);
+    fill: none;
+    stroke-width: 1;
+  }
+
+  .product-placeholder-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(168,85,247,0.3);
+    text-transform: uppercase;
+  }
+
+  /* ── FEATURED BANNER ── */
+  .featured-section {
+    padding: 0 0 100px;
+    position: relative;
+  }
+
+  .featured-banner {
+    margin: 0 60px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--purple-dark) 0%, var(--black) 60%);
+    display: flex;
+    align-items: center;
+  }
+
+  .featured-banner-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 100% at 80% 50%, rgba(123,53,192,0.3) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 50% at 10% 50%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  }
+
+  .featured-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px;
+    max-width: 500px;
+  }
+
+  .featured-tag {
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .featured-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .featured-title em { font-style: italic; color: var(--purple-light); }
+
+  .featured-desc {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    line-height: 2;
+    margin-bottom: 36px;
+  }
+
+  .featured-img {
+    position: absolute;
+    right: 60px;
+    bottom: 0;
+    height: 90%;
+    object-fit: contain;
+    filter: saturate(0.3) brightness(0.7);
+    mix-blend-mode: luminosity;
+  }
+
+  .featured-placeholder {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid rgba(168,85,247,0.1);
+  }
+
+  .featured-placeholder-text {
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 300;
+    color: rgba(168,85,247,0.06);
+    font-style: italic;
+    letter-spacing: -2px;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* ── ABOUT ── */
+  .about-section {
+    padding: 100px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    border-top: 1px solid rgba(168,85,247,0.1);
+  }
+
+  .about-visual {
+    position: relative;
+    height: 500px;
+  }
+
+  .about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.3) brightness(0.7);
+  }
+
+  .about-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, var(--purple-dark), var(--black));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(168,85,247,0.1);
+  }
+
+  .about-frame {
+    position: absolute;
+    top: 20px; left: 20px; right: -20px; bottom: -20px;
+    border: 1px solid rgba(168,85,247,0.2);
+    pointer-events: none;
+  }
+
+  .about-text { }
+
+  .about-number {
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 300;
+    color: rgba(168,85,247,0.08);
+    line-height: 1;
+    margin-bottom: -40px;
+    font-style: italic;
+  }
+
+  .about-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+
+  .about-title em { font-style: italic; color: var(--purple-light); }
+
+  .about-desc {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    line-height: 2.2;
+    margin-bottom: 32px;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(168,85,247,0.1);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--purple-light);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 80px 60px 40px;
+    border-top: 1px solid rgba(168,85,247,0.15);
+    background: linear-gradient(to bottom, transparent, rgba(13,13,20,0.5));
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand-name span { color: var(--purple-light); }
+
+  .footer-tagline {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+
+  .footer-col-title {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 20px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--purple-light); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(168,85,247,0.08);
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: rgba(138,138,154,0.5);
+    letter-spacing: 2px;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8,8,8,0.95);
+    z-index: 9000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(12px);
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: var(--deep);
+    border: 1px solid rgba(168,85,247,0.2);
+    padding: 60px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+  }
+
+  .modal-close:hover { color: var(--purple-light); }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .modal-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--purple-light);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(168,85,247,0.2);
+    color: var(--white);
+    padding: 14px 16px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-input:focus { border-color: var(--purple-light); }
+  .form-input::placeholder { color: rgba(138,138,154,0.4); }
+
+  .form-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--purple-mid), var(--purple));
+    border: none;
+    color: var(--white);
+    padding: 16px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.3s;
+  }
+
+  .form-btn:hover { opacity: 0.85; }
+
+  .form-error {
+    color: #f87171;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* ── ADMIN PANEL ── */
+  .admin-panel {
+    position: fixed;
+    top: 0; right: -500px;
+    width: 480px;
+    height: 100vh;
+    background: var(--deep);
+    border-left: 1px solid rgba(168,85,247,0.2);
+    z-index: 8000;
+    transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-y: auto;
+    padding: 80px 40px 40px;
+  }
+
+  .admin-panel.open { right: 0; }
+
+  .admin-panel-header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(168,85,247,0.1);
+  }
+
+  .admin-panel-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .admin-panel-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--purple-light);
+    text-transform: uppercase;
+  }
+
+  .admin-section-title {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 16px;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .admin-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(168,85,247,0.15);
+  }
+
+  .edit-field {
+    margin-bottom: 16px;
+  }
+
+  .edit-label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .edit-input {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(168,85,247,0.15);
+    color: var(--white);
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .edit-input:focus { border-color: var(--purple-light); }
+
+  .edit-textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .product-edit-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .product-edit-card {
+    background: rgba(168,85,247,0.04);
+    border: 1px solid rgba(168,85,247,0.12);
+    padding: 16px;
+  }
+
+  .product-edit-num {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--purple-light);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .save-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--purple-mid), var(--purple));
+    border: none;
+    color: var(--white);
+    padding: 14px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 32px;
+    transition: opacity 0.3s;
+  }
+
+  .save-btn:hover { opacity: 0.85; }
+
+  .logout-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(248,113,113,0.3);
+    color: rgba(248,113,113,0.7);
+    padding: 12px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.3s;
+  }
+
+  .logout-btn:hover { border-color: #f87171; color: #f87171; }
+
+  .admin-close-btn {
+    position: absolute;
+    top: 24px; right: 24px;
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .admin-close-btn:hover { color: var(--purple-light); }
+
+  .admin-badge {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: var(--purple-mid);
+    border: 1px solid var(--purple-light);
+    color: var(--white);
+    padding: 10px 20px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    z-index: 7999;
+    display: none;
+    transition: all 0.3s;
+    box-shadow: 0 0 30px rgba(123,53,192,0.4);
+  }
+
+  .admin-badge:hover { background: var(--purple); }
+  .admin-badge.visible { display: block; animation: pulse 2s infinite; }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(123,53,192,0.4); }
+    50% { box-shadow: 0 0 50px rgba(168,85,247,0.6); }
+  }
+
+  .save-toast {
+    position: fixed;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(13,13,20,0.95);
+    border: 1px solid var(--purple-light);
+    color: var(--white);
+    padding: 14px 32px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 9999;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .save-toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px; }
+    .hero-image-area { display: none; }
+    .collection-section { padding: 60px 24px; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .product-card:nth-child(1) { grid-row: auto; }
+    .about-section { grid-template-columns: 1fr; padding: 60px 24px; }
+    .about-visual { height: 300px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding: 0 24px; }
+    footer { padding: 60px 24px 40px; }
+    .featured-banner { margin: 0 24px; }
+    .admin-panel { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo" id="siteNameNav">CHASE <span>RAPH</span></div>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#featured">Featured</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="admin-btn" id="loginTrigger">Admin</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-tag" id="heroTag">New Collection 2025</div>
+    <h1 class="hero-title">
+      <span id="heroTitle1">Chase</span>
+      <em id="heroTitle2">Raph.</em>
+    </h1>
+    <p class="hero-sub" id="heroSub">Luxury fashion redefined. Crafted for those who wear their identity with precision and power.</p>
+    <div class="hero-cta">
+      <a href="#collection" class="btn-primary"><span>Explore Collection</span></a>
+      <a href="#about" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-image-area">
+    <div class="hero-placeholder">
+      <div class="hero-placeholder-text">CR</div>
+    </div>
+    <!-- To add hero image, replace the div above with:
+    <img src="YOUR_IMAGE_URL" alt="Hero" class="hero-img"> -->
+    <div class="hero-img-overlay"></div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Chase Raph</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Luxury Fashion</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">New Collection</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Premium Quality</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Chase Raph</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Luxury Fashion</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">New Collection</span>
+    <span class="marquee-item marquee-dot">✦</span>
+    <span class="marquee-item">Premium Quality</span>
+    <span class="marquee-item marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ── COLLECTION ── -->
+<section class="collection-section" id="collection">
+  <div class="section-header">
+    <div class="section-tag">Our Products</div>
+    <h2 class="section-title">The <em>Collection</em></h2>
+  </div>
+
+  <div class="products-grid" id="productsGrid">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-placeholder" id="p1-img-placeholder">
+          <div class="product-placeholder-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <div class="product-placeholder-label">Foto Produk 1</div>
+        </div>
+        <!-- Replace placeholder with: <img src="URL" class="product-img" alt="Product"> -->
+        <div class="product-overlay"></div>
+        <div class="product-purple-line"></div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat" id="p1-cat">Outerwear</div>
+        <div class="product-name" id="p1-name">Noir Trench Coat</div>
+        <div class="product-price" id="p1-price">Rp 8.500.000</div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-placeholder" id="p2-img-placeholder">
+          <div class="product-placeholder-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <div class="product-placeholder-label">Foto Produk 2</div>
+        </div>
+        <div class="product-overlay"></div>
+        <div class="product-purple-line"></div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat" id="p2-cat">Tops</div>
+        <div class="product-name" id="p2-name">Velour Silk Shirt</div>
+        <div class="product-price" id="p2-price">Rp 3.200.000</div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-placeholder" id="p3-img-placeholder">
+          <div class="product-placeholder-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <div class="product-placeholder-label">Foto Produk 3</div>
+        </div>
+        <div class="product-overlay"></div>
+        <div class="product-purple-line"></div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat" id="p3-cat">Bottoms</div>
+        <div class="product-name" id="p3-name">Eclipse Trousers</div>
+        <div class="product-price" id="p3-price">Rp 4.700.000</div>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-placeholder" id="p4-img-placeholder">
+          <div class="product-placeholder-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <div class="product-placeholder-label">Foto Produk 4</div>
+        </div>
+        <div class="product-overlay"></div>
+        <div class="product-purple-line"></div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat" id="p4-cat">Accessories</div>
+        <div class="product-name" id="p4-name">Obsidian Scarf</div>
+        <div class="product-price" id="p4-price">Rp 1.800.000</div>
+      </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-placeholder" id="p5-img-placeholder">
+          <div class="product-placeholder-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <div class="product-placeholder-label">Foto Produk 5</div>
+        </div>
+        <div class="product-overlay"></div>
+        <div class="product-purple-line"></div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat" id="p5-cat">Dresses</div>
+        <div class="product-name" id="p5-name">Velvet Dusk Gown</div>
+        <div class="product-price" id="p5-price">Rp 12.000.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED ── -->
+<section class="featured-section" id="featured">
+  <div class="featured-banner">
+    <div class="featured-banner-bg"></div>
+    <div class="featured-content">
+      <div class="featured-tag" id="featuredTag">✦ Limited Edition</div>
+      <h2 class="featured-title" id="featuredTitle">The <em>Midnight</em> Series</h2>
+      <p class="featured-desc" id="featuredDesc">Our most exclusive collection. Hand-crafted with the finest Italian fabrics. Each piece numbered and certified.</p>
+      <a href="#collection" class="btn-primary"><span>Shop Now</span></a>
+    </div>
+    <div class="featured-placeholder">
+      <div class="featured-placeholder-text">Limited<br>Edition</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about-section" id="about">
+  <div class="about-visual">
+    <div class="about-placeholder">
+      <div style="font-family:var(--font-display);font-size:80px;font-weight:300;color:rgba(168,85,247,0.08);font-style:italic;">CR</div>
+    </div>
+    <!-- Replace with: <img src="URL" class="about-img" alt="About"> -->
+    <div class="about-frame"></div>
+  </div>
+  <div class="about-text">
+    <div class="about-number">01</div>
+    <div class="section-tag">Our Philosophy</div>
+    <h2 class="about-title" id="aboutTitle">Dressed in <em>Power.</em></h2>
+    <p class="about-desc" id="aboutDesc">Chase Raph was born from a vision of fashion as identity. We believe that what you wear speaks before you do. Every piece in our collection is a statement — bold, precise, and unapologetic.</p>
+    <p class="about-desc" id="aboutDesc2">From our ateliers in Milan to the streets of Jakarta, we bring luxury that transcends geography. Chase Raph is not just a brand — it's a way of being.</p>
+    <a href="#collection" class="btn-primary"><span>Discover More</span></a>
+    <div class="about-stats">
+      <div>
+        <span class="stat-num" id="stat1">150+</span>
+        <span class="stat-label">Exclusive Pieces</span>
+      </div>
+      <div>
+        <span class="stat-num" id="stat2">12</span>
+        <span class="stat-label">Collections</span>
+      </div>
+      <div>
+        <span class="stat-num" id="stat3">8+</span>
+        <span class="stat-label">Years of Craft</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="contact">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">CHASE <span>RAPH</span></div>
+      <p class="footer-tagline" id="footerTagline">Luxury fashion for those who<br>define their own story.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Collection</div>
+      <ul class="footer-links">
+        <li><a href="#">Outerwear</a></li>
+        <li><a href="#">Tops</a></li>
+        <li><a href="#">Bottoms</a></li>
+        <li><a href="#">Accessories</a></li>
+        <li><a href="#">New Arrivals</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Sustainability</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#" id="footerEmail">info@chaseraph.com</a></li>
+        <li><a href="#" id="footerPhone">+62 21 1234 5678</a></li>
+        <li><a href="#" id="footerAddress">Jakarta, Indonesia</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 CHASE RAPH. All rights reserved.</div>
+    <div class="footer-copy">Luxury. Identity. Power.</div>
+  </div>
+</footer>
+
+<!-- ── LOGIN MODAL ── -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 class="modal-title">Admin Login</h2>
+    <div class="modal-sub">Chase Raph Management</div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" id="loginEmail" placeholder="admin@chaseraph.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-input" id="loginPassword" placeholder="••••••••">
+    </div>
+    <div class="form-error" id="loginError">Email atau password salah.</div>
+    <button class="form-btn" onclick="doLogin()">Masuk</button>
+  </div>
+</div>
+
+<!-- ── ADMIN PANEL ── -->
+<div class="admin-panel" id="adminPanel">
+  <button class="admin-close-btn" onclick="closeAdminPanel()">✕</button>
+
+  <div class="admin-panel-header">
+    <div class="admin-panel-title">Admin Panel</div>
+    <div class="admin-panel-sub">Chase Raph Management</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="admin-section-title">Hero Section</div>
+  <div class="edit-field">
+    <label class="edit-label">Tag Line</label>
+    <input type="text" class="edit-input" id="edit-heroTag" value="New Collection 2025">
+  </div>
+  <div class="edit-field">
+    <label class="edit-label">Judul 1</label>
+    <input type="text" class="edit-input" id="edit-heroTitle1" value="Chase">
+  </div>
+  <div class="edit-field">
+    <label class="edit-label">Judul 2 (Italic)</label>
+    <input type="text" class="edit-input" id="edit-heroTitle2" value="Raph.">
+  </div>
+  <div class="edit-field">
+    <label class="edit-label">Sub Judul</label>
+    <textarea class="edit-input edit-textarea" id="edit-heroSub">Luxury fashion redefined. Crafted for those who wear their identity with precision and power.</textarea>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="admin-section-title">Featured Banner</div>
+  <div class="edit-field">
+    <label class="edit-label">Tag</label>
+    <input type="text" class="edit-input" id="edit-featuredTag" value="✦ Limited Edition">
+  </div>
+  <div class="edit-field">
+    <label class="edit-label">Judul</label>
+    <input type="text" class="edit-input" id="edit-featuredTitle" value="The Midnight Series">
+  </div>
+  <div class="edit-field">
+    <label class="edit-label">Deskripsi</label>
+    <textarea class="edit-input edit-textarea" id="edit-featuredDesc">Our most exclusive collection. Hand-crafted with the finest Italian fabrics. Each piece numbered and certified.</textarea>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="admin-section-title">About Section</div>
+  <div class="edit-field">
+    <label class="edit-label">Judul</label>
+    <input type="text" class="edit-input" id="edit-aboutTitle" value="Dressed in Power.">
+  </div>
+  <div class="edit-field">
+    <label class="edit-label">Deskripsi 1</label>
+    <textarea class="edit-input edit-textarea" id="edit-aboutDesc">Chase Raph was born from a vision of fashion as identity. We believe that what you wear speaks before you do. Every piece in our collection is a statement — bold, precise, and unapologetic.</textarea>
+  </div>
+  <div class="edit-field">
+    <label class="edit-label">Deskripsi 2</label>
+    <textarea class="edit-input edit-textarea" id="edit-aboutDesc2">From our ateliers in Milan to the streets of Jakarta, we bring luxury that transcends geography. Chase Raph is not just a brand — it's a way of being.</textarea>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+    <div class="edit-field">
+      <label class="edit-label">Stat 1</label>
+      <input type="text" class="edit-input" id="edit-stat1" value="150+">
+    </div>
+    <div class="edit-field">
+      <label class="edit-label">Stat 2</label>
+      <input type="text" class="edit-input" id="edit-stat2" value="12">
+    </div>
+    <div class="edit-field">
+      <label class="edit-label">Stat 3</label>
+      <input type="text" class="edit-input" id="edit-stat3" value="8+">
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="admin-section-title">Produk</div>
+  <div class="product-edit-cards">
+    <!-- repeat for 5 products -->
+    <div class="product-edit-card" id="pec1">
+      <div class="product-edit-num">Produk 1</div>
+      <div class="edit-field"><label class="edit-label">Kategori</label><input type="text" class="edit-input" id="edit-p1-cat" value="Outerwear"></div>
+      <div class="edit-field"><label class="edit-label">Nama</label><input type="text" class="edit-input" id="edit-p1-name" value="Noir Trench Coat"></div>
+      <div class="edit-field"><label class="edit-label">Harga</label><input type="text" class="edit-input" id="edit-p1-price" value="Rp 8.500.000"></div>
+      <div class="edit-field"><label class="edit-label">URL Foto</label><input type="text" class="edit-input" id="edit-p1-img" placeholder="https://..."></div>
+    </div>
+    <div class="product-edit-card">
+      <div class="product-edit-num">Produk 2</div>
+      <div class="edit-field"><label class="edit-label">Kategori</label><input type="text" class="edit-input" id="edit-p2-cat" value="Tops"></div>
+      <div class="edit-field"><label class="edit-label">Nama</label><input type="text" class="edit-input" id="edit-p2-name" value="Velour Silk Shirt"></div>
+      <div class="edit-field"><label class="edit-label">Harga</label><input type="text" class="edit-input" id="edit-p2-price" value="Rp 3.200.000"></div>
+      <div class="edit-field"><label class="edit-label">URL Foto</label><input type="text" class="edit-input" id="edit-p2-img" placeholder="https://..."></div>
+    </div>
+    <div class="product-edit-card">
+      <div class="product-edit-num">Produk 3</div>
+      <div class="edit-field"><label class="edit-label">Kategori</label><input type="text" class="edit-input" id="edit-p3-cat" value="Bottoms"></div>
+      <div class="edit-field"><label class="edit-label">Nama</label><input type="text" class="edit-input" id="edit-p3-name" value="Eclipse Trousers"></div>
+      <div class="edit-field"><label class="edit-label">Harga</label><input type="text" class="edit-input" id="edit-p3-price" value="Rp 4.700.000"></div>
+      <div class="edit-field"><label class="edit-label">URL Foto</label><input type="text" class="edit-input" id="edit-p3-img" placeholder="https://..."></div>
+    </div>
+    <div class="product-edit-card">
+      <div class="product-edit-num">Produk 4</div>
+      <div class="edit-field"><label class="edit-label">Kategori</label><input type="text" class="edit-input" id="edit-p4-cat" value="Accessories"></div>
+      <div class="edit-field"><label class="edit-label">Nama</label><input type="text" class="edit-input" id="edit-p4-name" value="Obsidian Scarf"></div>
+      <div class="edit-field"><label class="edit-label">Harga</label><input type="text" class="edit-input" id="edit-p4-price" value="Rp 1.800.000"></div>
+      <div class="edit-field"><label class="edit-label">URL Foto</label><input type="text" class="edit-input" id="edit-p4-img" placeholder="https://..."></div>
+    </div>
+    <div class="product-edit-card">
+      <div class="product-edit-num">Produk 5</div>
+      <div class="edit-field"><label class="edit-label">Kategori</label><input type="text" class="edit-input" id="edit-p5-cat" value="Dresses"></div>
+      <div class="edit-field"><label class="edit-label">Nama</label><input type="text" class="edit-input" id="edit-p5-name" value="Velvet Dusk Gown"></div>
+      <div class="edit-field"><label class="edit-label">Harga</label><input type="text" class="edit-input" id="edit-p5-price" value="Rp 12.000.000"></div>
+      <div class="edit-field"><label class="edit-label">URL Foto</label><input type="text" class="edit-input" id="edit-p5-img" placeholder="https://..."></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="admin-section-title">Kontak</div>
+  <div class="edit-field"><label class="edit-label">Email</label><input type="text" class="edit-input" id="edit-footerEmail" value="info@chaseraph.com"></div>
+  <div class="edit-field"><label class="edit-label">Telepon</label><input type="text" class="edit-input" id="edit-footerPhone" value="+62 21 1234 5678"></div>
+  <div class="edit-field"><label class="edit-label">Alamat</label><input type="text" class="edit-input" id="edit-footerAddress" value="Jakarta, Indonesia"></div>
+  <div class="edit-field"><label class="edit-label">Footer Tagline</label><textarea class="edit-input edit-textarea" id="edit-footerTagline">Luxury fashion for those who define their own story.</textarea></div>
+
+  <button class="save-btn" onclick="saveChanges()">✓ Simpan Semua Perubahan</button>
+  <button class="logout-btn" onclick="doLogout()">Keluar dari Admin</button>
+</div>
+
+<!-- ADMIN BADGE -->
+<button class="admin-badge" id="adminBadge" onclick="toggleAdminPanel()">⚙ Edit Mode</button>
+
+<!-- SAVE TOAST -->
+<div class="save-toast" id="saveToast">✓ Perubahan Disimpan</div>
+
+<script>
+  // ── CONFIG ── (GANTI PASSWORD DI SINI)
+  const ADMIN_EMAIL = 'apotganteng232@gmail.com';
+  const ADMIN_PASSWORD = 'ChaseRaph2025!';
+
+  // ── JSONBIN CONFIG ── GANTI 2 BARIS INI DENGAN MILIK KAMU
+  const JSONBIN_BIN_ID = 'GANTI_BIN_ID_KAMU';       // contoh: 6651a3f8ad19ca34f87d1234
+  const JSONBIN_API_KEY = 'GANTI_API_KEY_KAMU';      // contoh: $2a$10$xxxxxxxxxxxxxxxxxxxx
+
+  // ── STATE ──
+  let isLoggedIn = false;
+
+  // ── FETCH DATA FROM JSONBIN ──
+  async function fetchData() {
+    try {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
+        headers: { 'X-Master-Key': JSONBIN_API_KEY }
+      });
+      if (!res.ok) return null;
+      const json = await res.json();
+      return json.record;
+    } catch(e) {
+      console.warn('Gagal ambil data:', e);
+      return null;
+    }
+  }
+
+  // ── SAVE DATA TO JSONBIN ──
+  async function pushData(data) {
+    try {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': JSONBIN_API_KEY
+        },
+        body: JSON.stringify(data)
+      });
+      return res.ok;
+    } catch(e) {
+      console.warn('Gagal simpan data:', e);
+      return false;
+    }
+  }
+
+  // ── LOAD SAVED DATA ──
+  async function loadData() {
+    const d = await fetchData();
+    if (!d) return;
+
+    const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.textContent = val; };
+    const setInput = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.value = val; };
+
+    set('heroTag', d.heroTag);
+    set('heroTitle1', d.heroTitle1);
+    set('heroTitle2', d.heroTitle2);
+    set('heroSub', d.heroSub);
+    set('featuredTag', d.featuredTag);
+    set('p1-cat', d.p1cat); set('p1-name', d.p1name); set('p1-price', d.p1price);
+    set('p2-cat', d.p2cat); set('p2-name', d.p2name); set('p2-price', d.p2price);
+    set('p3-cat', d.p3cat); set('p3-name', d.p3name); set('p3-price', d.p3price);
+    set('p4-cat', d.p4cat); set('p4-name', d.p4name); set('p4-price', d.p4price);
+    set('p5-cat', d.p5cat); set('p5-name', d.p5name); set('p5-price', d.p5price);
+    set('aboutTitle', d.aboutTitle); set('aboutDesc', d.aboutDesc); set('aboutDesc2', d.aboutDesc2);
+    set('stat1', d.stat1); set('stat2', d.stat2); set('stat3', d.stat3);
+    set('footerEmail', d.footerEmail); set('footerPhone', d.footerPhone); set('footerAddress', d.footerAddress);
+    set('footerTagline', d.footerTagline);
+
+    // Featured title has em inside — handle specially
+    if (d.featuredTitle) {
+      const ft = document.getElementById('featuredTitle');
+      if (ft) ft.innerHTML = d.featuredTitle;
+    }
+    if (d.aboutTitle) {
+      const at = document.getElementById('aboutTitle');
+      if (at) at.innerHTML = d.aboutTitle;
+    }
+
+    // Product images
+    [1,2,3,4,5].forEach(i => {
+      const imgUrl = d['p'+i+'img'];
+      if (imgUrl) applyProductImage(i, imgUrl);
+      setInput('edit-p'+i+'-img', imgUrl || '');
+    });
+
+    // Sync inputs
+    setInput('edit-heroTag', d.heroTag);
+    setInput('edit-heroTitle1', d.heroTitle1);
+    setInput('edit-heroTitle2', d.heroTitle2);
+    setInput('edit-heroSub', d.heroSub);
+    setInput('edit-featuredTag', d.featuredTag);
+    setInput('edit-featuredTitle', d.featuredTitle);
+    setInput('edit-featuredDesc', d.featuredDesc);
+    setInput('edit-aboutTitle', d.aboutTitle);
+    setInput('edit-aboutDesc', d.aboutDesc);
+    setInput('edit-aboutDesc2', d.aboutDesc2);
+    setInput('edit-stat1', d.stat1);
+    setInput('edit-stat2', d.stat2);
+    setInput('edit-stat3', d.stat3);
+    setInput('edit-footerEmail', d.footerEmail);
+    setInput('edit-footerPhone', d.footerPhone);
+    setInput('edit-footerAddress', d.footerAddress);
+    setInput('edit-footerTagline', d.footerTagline);
+    [1,2,3,4,5].forEach(i => {
+      setInput('edit-p'+i+'-cat', d['p'+i+'cat']);
+      setInput('edit-p'+i+'-name', d['p'+i+'name']);
+      setInput('edit-p'+i+'-price', d['p'+i+'price']);
+    });
+  }
+
+  function applyProductImage(num, url) {
+    const placeholder = document.getElementById('p'+num+'-img-placeholder');
+    if (!placeholder) return;
+    const wrap = placeholder.parentElement;
+    if (!url) {
+      placeholder.style.display = 'flex';
+      const existingImg = wrap.querySelector('.product-img');
+      if (existingImg) existingImg.remove();
+      return;
+    }
+    placeholder.style.display = 'none';
+    let img = wrap.querySelector('.product-img');
+    if (!img) {
+      img = document.createElement('img');
+      img.className = 'product-img';
+      img.alt = 'Product';
+      wrap.insertBefore(img, wrap.firstChild);
+    }
+    img.src = url;
+  }
+
+  // ── SAVE ──
+  async function saveChanges() {
+    const g = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+
+    const data = {
+      heroTag: g('edit-heroTag'),
+      heroTitle1: g('edit-heroTitle1'),
+      heroTitle2: g('edit-heroTitle2'),
+      heroSub: g('edit-heroSub'),
+      featuredTag: g('edit-featuredTag'),
+      featuredTitle: g('edit-featuredTitle'),
+      featuredDesc: g('edit-featuredDesc'),
+      aboutTitle: g('edit-aboutTitle'),
+      aboutDesc: g('edit-aboutDesc'),
+      aboutDesc2: g('edit-aboutDesc2'),
+      stat1: g('edit-stat1'), stat2: g('edit-stat2'), stat3: g('edit-stat3'),
+      footerEmail: g('edit-footerEmail'),
+      footerPhone: g('edit-footerPhone'),
+      footerAddress: g('edit-footerAddress'),
+      footerTagline: g('edit-footerTagline'),
+    };
+
+    [1,2,3,4,5].forEach(i => {
+      data['p'+i+'cat'] = g('edit-p'+i+'-cat');
+      data['p'+i+'name'] = g('edit-p'+i+'-name');
+      data['p'+i+'price'] = g('edit-p'+i+'-price');
+      data['p'+i+'img'] = g('edit-p'+i+'-img');
+    });
+
+    const saveBtn = document.querySelector('.save-btn');
+    if (saveBtn) { saveBtn.textContent = '⏳ Menyimpan...'; saveBtn.disabled = true; }
+
+    const ok = await pushData(data);
+
+    if (saveBtn) { saveBtn.textContent = '✓ Simpan Semua Perubahan'; saveBtn.disabled = false; }
+
+    if (ok) {
+      loadData();
+      showToast();
+    } else {
+      alert('Gagal menyimpan! Cek koneksi atau API key kamu.');
+    }
+  }
+
+  function showToast() {
+    const t = document.getElementById('saveToast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ── AUTH ──
+  function openModal() { document.getElementById('loginModal').classList.add('active'); }
+  function closeModal() {
+    document.getElementById('loginModal').classList.remove('active');
+    document.getElementById('loginError').style.display = 'none';
+  }
+
+  function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPassword').value;
+
+    if (email === ADMIN_EMAIL && pass === ADMIN_PASSWORD) {
+      isLoggedIn = true;
+      closeModal();
+      document.getElementById('adminBadge').classList.add('visible');
+      document.getElementById('loginTrigger').textContent = 'Panel';
+      document.getElementById('loginTrigger').onclick = toggleAdminPanel;
+      openAdminPanel();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function doLogout() {
+    isLoggedIn = false;
+    document.getElementById('adminBadge').classList.remove('visible');
+    closeAdminPanel();
+    document.getElementById('loginTrigger').textContent = 'Admin';
+    document.getElementById('loginTrigger').onclick = openModal;
+  }
+
+  function openAdminPanel() { document.getElementById('adminPanel').classList.add('open'); }
+  function closeAdminPanel() { document.getElementById('adminPanel').classList.remove('open'); }
+  function toggleAdminPanel() {
+    const panel = document.getElementById('adminPanel');
+    panel.classList.toggle('open');
+  }
+
+  // Enter key on login
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('loginModal').classList.contains('active')) {
+      doLogin();
+    }
+    if (e.key === 'Escape') {
+      closeModal();
+      closeAdminPanel();
+    }
+  });
+
+  // ── INIT ──
+  document.getElementById('loginTrigger').addEventListener('click', openModal);
+  document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  loadData(); // async, loads from JSONBin on page open
+
+  // ── NAV SCROLL EFFECT ──
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(8,8,8,0.98)';
+    } else {
+      nav.style.background = 'linear-gradient(to bottom, rgba(8,8,8,0.98) 0%, transparent 100%)';
+    }
+  });
+</script>
+
+</body>
+</html>
